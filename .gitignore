@@ -1,0 +1,27 @@
+# 비밀정보 (CLAUDE.md 규칙 5: .env는 커밋하지 않고 .env.example만 커밋)
+.env
+.env.*
+!.env.example
+
+# 개인정보·용량 큰 원본 데이터 (CLAUDE.md 규칙 6, data/ 정책)
+data/raw/
+*.db
+*.sqlite
+*.sqlite3
+
+# 파이썬 빌드·캐시
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# 에디터·OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# 로그·백업
+logs/
+backups/
