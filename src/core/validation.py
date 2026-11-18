@@ -21,9 +21,9 @@ def clean_required_text(value: Optional[str], field_label: str, max_length: int)
     """
     cleaned = (value or "").strip()
     if not cleaned:
-        raise ValidationError(f"{field_label}을(를) 입력해 주세요.")
+        raise ValidationError(f"{field_label} 입력이 필요합니다.")
     if len(cleaned) > max_length:
-        raise ValidationError(f"{field_label}은(는) {max_length}자 이하로 입력해 주세요.")
+        raise ValidationError(f"{field_label}: 최대 {max_length}자까지 입력할 수 있습니다.")
     return cleaned
 
 

@@ -14,6 +14,14 @@ class ValidationError(ValueError):
         self.message = message
 
 
+class NotFoundError(LookupError):
+    """요청한 단어장·단어가 없을 때 발생한다. (F8.5)"""
+
+    def __init__(self, message: str = "요청한 항목을 찾을 수 없습니다."):
+        super().__init__(message)
+        self.message = message
+
+
 class DuplicateWordError(ValueError):
     """같은 단어장에 이미 있는 단어를 추가하려 할 때 발생한다. (REQ-010)"""
 
