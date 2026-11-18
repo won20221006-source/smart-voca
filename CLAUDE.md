@@ -18,7 +18,7 @@
 | DB | SQLite (파일 1개, 로컬) |
 | 실행 환경 | 로컬 개발 (웹 서버 1개, 1인 사용 기준) |
 
-> 확정: 2026-11-11, `ai-agent/claude/smart-voca_Decision_Records_v1.0_261111.md` 참조. 로그인 도입 시 재검토.
+> 확정: 2026-11-11, `docs/smart-voca_Decision_Records_v1.0_261111.md` 참조. 로그인 도입 시 재검토.
 
 ## 상위 정책 참조
 

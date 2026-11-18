@@ -1,6 +1,6 @@
 # 기술 스택 검토 (Decision Records)
 
-**파일 위치**: `ai-agent/claude/smart-voca_Decision_Records_v1.0_261111.md`
+**파일 위치**: `docs/smart-voca_Decision_Records_v1.0_261111.md`
 **작성일**: 2026-11-11
 **버전**: v1.0 (확정)
 **설명**: 웹 기반 스마트보카의 기술 스택 후보를 비교하고 추천안을 제시하는 ADR 검토 문서

@@ -145,7 +145,7 @@
 4. **복습 방식**: 간격 반복 알고리즘을 직접 구현하는가, 기존 방식을 쓰는가?
 5. **사용자 구분**: 로그인이 필요한가, 아니면 단일 사용자로 충분한가?
 6. **기술 스택** — ✅ **결정: Python 3 + FastAPI + SQLAlchemy + Jinja2/HTMX + SQLite (2026-11-11)**
-   - 상세: `ai-agent/claude/smart-voca_Decision_Records_v1.0_261111.md`
+   - 상세: `docs/smart-voca_Decision_Records_v1.0_261111.md`
    - 근거: 1인·로컬 사용 가정에 맞는 단순 구성, CLAUDE.md 규칙과 일치, 간격 반복 계산 테스트 용이
    - 재검토 조건: 로그인 필요(§9-5) 확정 시 Django 검토
 7. **기간과 인력**: 마감일과 참여 인원은?

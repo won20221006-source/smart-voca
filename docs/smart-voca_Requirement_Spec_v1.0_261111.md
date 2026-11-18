@@ -1,8 +1,8 @@
 # 스마트보카 요구사항 명세서 (Requirement Spec)
 
-**파일 위치**: `ai-agent/claude/smart-voca_Requirement_Spec_v1.0_261111.md`
+**파일 위치**: `docs/smart-voca_Requirement_Spec_v1.0_261111.md`
 **작성일**: 2026-11-11
-**버전**: v1.0 (초안, 승인 전)
+**버전**: v1.0 (승인, 2026-11-18 사용자 확인)
 **설명**: 기획서(BR-01~06)를 상세 기능·비기능 요구사항으로 분해하고, REQ-ID와 추적 매트릭스를 정의하는 분석 단계 산출물
 
 ---

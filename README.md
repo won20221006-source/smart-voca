@@ -3,8 +3,8 @@
 단어장을 만들고, 단어를 외우고, 정해진 간격으로 복습하는 1인용 웹 단어 학습 도구입니다.
 
 - 기술 스택: Python 3.12, FastAPI, SQLAlchemy, Jinja2, SQLite (로그인 없음)
-- 요구사항: `ai-agent/claude/smart-voca_Requirement_Spec_v1.0_261111.md`
-- 기능 분해: `ai-agent/claude/smart-voca_Function_Map_v1.0_261111.md`
+- 요구사항: `docs/smart-voca_Requirement_Spec_v1.0_261111.md`
+- 기능 분해: `docs/smart-voca_Function_Map_v1.0_261111.md`
 
 ## 설치
 
