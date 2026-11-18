@@ -21,8 +21,8 @@ python -m venv .venv
 
 브라우저에서 `http://127.0.0.1:8000` 을 엽니다. 처음 실행하면 `data/smart_voca.db` 가 자동으로 만들어집니다.
 
-DB 위치를 바꾸려면 환경변수 `SMART_VOCA_DB_PATH` 를 설정합니다. 예시는 `.env.example` 을 참고하세요.
-(`.env` 자동 로드는 아직 없습니다. 필요하면 셸 환경변수로 설정합니다.)
+DB 위치를 바꾸려면 프로젝트 루트에 `.env` 파일을 만들고 `SMART_VOCA_DB_PATH` 를 설정합니다. 예시는 `.env.example` 을 참고하세요.
+`.env` 는 `.gitignore` 대상이라 커밋되지 않습니다. 이미 설정된 셸 환경변수가 있으면 그 값이 우선합니다.
 
 ## 테스트
 
