@@ -50,3 +50,23 @@
 - 이 일지 파일은 CLAUDE.md 기록 규칙에 따라 `ai-agent/claude/`에 작성했습니다.
 - 세션 중 개별 항목의 정확한 시각은 기록하지 않았습니다(작성 시점 기준 15:34).
 - 커밋 작성자는 현재 git 전역 설정값을 따릅니다.
+
+## 연동 상태 재확인 (2026-11-18)
+요청: 깃허브 연동 이어서 진행
+처리:
+- `gh auth status`: 계정 `won20221006-source` 로그인 유지 (scope: repo, workflow 등)
+- `gh repo view`: `smart-voca` 비공개 리포 정상 조회
+- `git fetch` 및 `git ls-remote`: 로컬·원격 `main` 모두 `5d98e19`로 일치, 미push 커밋 없음
+- 작업 트리 clean 확인
+
+## 핵심 로직 1차 구현 (2026-11-18)
+요청: 계속 진행해줘
+처리:
+- 다음 단계를 기능 분해도(F4·F6·F8)의 순수 로직 모듈로 한정 (DB·웹은 패키지 설치 승인 후)
+- 구현: `src/core/{errors,clock,config,validation,scheduler,stats}.py`, `src/__init__.py`, `src/core/__init__.py`
+- 테스트: `tests/test_{scheduler,stats,validation}.py` (unittest, 표준 라이브러리만 사용)
+- 매핑: REQ-001·005·006·010·015~018·022~024, F4.1~F4.3, F6.1~F6.3, F8.2·F8.5·F8.6 (주석에 REQ-ID 기재)
+- 검증 한계: 이 환경에 실행 가능한 Python이 없음 (`python`은 스토어 실행 스텁). 테스트 미실행, 기댓값은 코드 읽기로 대조함
+- 가정 2건 (요구사항 확인 필요): 새 단어는 추가한 날 복습 대상 / 예문 길이 제한 없음
+- 미결 유지: 복습 간격 값(REQ-017 제안값을 config에 임시 적용), 로그인(REQ-025~026)
+- 커밋·푸시는 미실행 (승인 대기)
