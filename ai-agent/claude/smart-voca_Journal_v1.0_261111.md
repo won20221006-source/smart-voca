@@ -70,3 +70,17 @@
 - 가정 2건 (요구사항 확인 필요): 새 단어는 추가한 날 복습 대상 / 예문 길이 제한 없음
 - 미결 유지: 복습 간격 값(REQ-017 제안값을 config에 임시 적용), 로그인(REQ-025~026)
 - 커밋·푸시는 미실행 (승인 대기)
+
+## 웹 MVP 구현 및 실행 검증 (2026-11-18)
+요청: 다 해줘 (Python 설치·테스트·커밋·푸시·나머지 구현)
+처리:
+- Python 3.12.10 설치(winget), 프로젝트 `.venv` 생성 후 패키지 설치 (requirements.txt 고정)
+- 1차 핵심 로직 커밋·푸시: `7372361 feat: 복습 스케줄·학습 통계·입력 검증 핵심 로직 추가`
+- DB 계층: `src/models/` (단어장·단어·학습기록, FK CASCADE, PRAGMA foreign_keys) (NFR-002, NFR-009)
+- 서비스 계층: `src/services/` (단어장·단어·학습·복습·통계) 
+- 웹 계층: `src/app.py`, `src/routes/`, `src/templates/` (단어장·단어·학습 카드·결과·오늘의 복습·통계)
+- 테스트: `tests/test_services.py`, `tests/test_routes.py` 포함 전체 42건 통과
+- 서버 실행 검증: uvicorn `src.app:create_app --factory` 기동, GET / 200, POST /wordbooks 303 후 목록 반영 확인 (임시 DB 사용)
+- README.md, .env.example 작성 (NFR-001)
+- 결정: 로그인 없음(REQ-025), 복습 간격은 REQ-017 제안값을 임시 적용, 새 단어 첫 복습일은 추가한 날 (가정, 확인 필요)
+- 미해결: .env 자동 로드 미구현, Starlette TestClient의 httpx 관련 deprecation 경고 (동작 영향 없음)
