@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}학습 · 스마트보카{% endblock %}
+{% block content %}
+<p>남은 카드 {{ remaining }}장 · 정답 {{ correct }} · 오답 {{ wrong }}</p>
+
+<div class="card">
+  <div class="word">{{ word.word }}</div>
+  <details>
+    <summary>뒤집어서 뜻 보기</summary>
+    <p><strong>뜻:</strong> {{ word.meaning }}</p>
+    {% if word.example %}<p><strong>예문:</strong> {{ word.example }}</p>{% endif %}
+  </details>
+</div>
+
+<form method="post" action="/study/answer">
+  <input type="hidden" name="word_id" value="{{ word.id }}">
+  <input type="hidden" name="ids" value="{{ queue|join(',') }}">
+  <input type="hidden" name="correct" value="{{ correct }}">
+  <input type="hidden" name="wrong" value="{{ wrong }}">
+  <button type="submit" name="result" value="correct">정답</button>
+  <button type="submit" name="result" value="wrong">오답</button>
+</form>
+{% endblock %}

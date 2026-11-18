@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}오늘의 복습 · 스마트보카{% endblock %}
+{% block content %}
+<h1>오늘의 복습</h1>
+
+{% if total_due %}
+<p>오늘 복습할 단어 {{ total_due }}개</p>
+<p><a href="/review/start">복습 시작</a></p>
+{% for wordbook, words in groups %}
+<h2>{{ wordbook.name }} ({{ words|length }}개)</h2>
+<ul>
+  {% for item in words %}
+  <li>{{ item.word }} — {{ item.meaning }}</li>
+  {% endfor %}
+</ul>
+{% endfor %}
+{% else %}
+<p>오늘 복습할 단어가 없습니다.</p>
+{% endif %}
+{% endblock %}

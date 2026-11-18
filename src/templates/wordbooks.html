@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}단어장 목록 · 스마트보카{% endblock %}
+{% block content %}
+<h1>단어장</h1>
+
+<form method="post" action="/wordbooks">
+  <input name="name" maxlength="60" placeholder="새 단어장 이름 (1~50자)" required>
+  <button type="submit">단어장 만들기</button>
+</form>
+
+{% if rows %}
+<table>
+  <tr><th>이름</th><th>단어 수</th><th></th></tr>
+  {% for wordbook, count in rows %}
+  <tr>
+    <td><a href="/wordbooks/{{ wordbook.id }}">{{ wordbook.name }}</a></td>
+    <td>{{ count }}</td>
+    <td>
+      <a href="/wordbooks/{{ wordbook.id }}/study">학습 시작</a>
+      <form class="inline" method="post" action="/wordbooks/{{ wordbook.id }}/delete"
+            onsubmit="return confirm('단어장과 소속 단어·학습 기록이 모두 삭제됩니다. 삭제할까요?');">
+        <button type="submit">삭제</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>아직 단어장이 없습니다. 위에서 만들어 주세요.</p>
+{% endif %}
+{% endblock %}

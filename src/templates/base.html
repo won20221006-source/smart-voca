@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}스마트보카{% endblock %}</title>
+  <style>
+    body { font-family: "Malgun Gothic", sans-serif; max-width: 880px; margin: 0 auto; padding: 16px; color: #222; }
+    nav a { margin-right: 14px; }
+    .error { background: #fde8e8; color: #9b1c1c; padding: 8px 12px; border-radius: 4px; }
+    .notice { background: #e8f4fd; color: #1c4a9b; padding: 8px 12px; border-radius: 4px; }
+    table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+    th, td { border-bottom: 1px solid #ddd; padding: 6px; text-align: left; }
+    form.inline { display: inline; }
+    .card { border: 1px solid #bbb; border-radius: 8px; padding: 24px; margin: 16px 0; }
+    .card .word { font-size: 2em; font-weight: bold; }
+    button { margin-right: 6px; padding: 6px 12px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">단어장</a>
+    <a href="/review">오늘의 복습</a>
+    <a href="/stats">학습 통계</a>
+  </nav>
+  <hr>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  {% if notice %}<p class="notice">{{ notice }}</p>{% endif %}
+  {% block content %}{% endblock %}
+</body>
+</html>

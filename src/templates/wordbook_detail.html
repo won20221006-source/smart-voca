@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ wordbook.name }} · 스마트보카{% endblock %}
+{% block content %}
+<h1>{{ wordbook.name }}</h1>
+<p><a href="/wordbooks/{{ wordbook.id }}/study">이 단어장으로 학습 시작</a></p>
+
+<form method="post" action="/wordbooks/{{ wordbook.id }}/rename">
+  <input name="name" maxlength="60" value="{{ wordbook.name }}" required>
+  <button type="submit">이름 수정</button>
+</form>
+
+<h2>단어 추가</h2>
+<form method="post" action="/wordbooks/{{ wordbook.id }}/words">
+  <input name="word" maxlength="100" placeholder="단어" required>
+  <input name="meaning" maxlength="200" placeholder="뜻" required>
+  <input name="example" placeholder="예문 (선택)">
+  <button type="submit">추가</button>
+</form>
+
+<h2>단어 목록 ({{ words|length }}개)</h2>
+{% if words %}
+<table>
+  <tr><th>단어</th><th>뜻</th><th>예문</th><th>다음 복습일</th><th></th></tr>
+  {% for item in words %}
+  <tr>
+    <td>{{ item.word }}</td>
+    <td>{{ item.meaning }}</td>
+    <td>{{ item.example or "" }}</td>
+    <td>{{ item.next_review_date.isoformat() }}</td>
+    <td>
+      <form class="inline" method="post" action="/words/{{ item.id }}/update">
+        <input name="word" value="{{ item.word }}" maxlength="100" required>
+        <input name="meaning" value="{{ item.meaning }}" maxlength="200" required>
+        <input name="example" value="{{ item.example or '' }}" placeholder="예문">
+        <button type="submit">수정</button>
+      </form>
+      <form class="inline" method="post" action="/words/{{ item.id }}/delete"
+            onsubmit="return confirm('이 단어와 학습 기록을 삭제할까요?');">
+        <button type="submit">삭제</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>아직 단어가 없습니다.</p>
+{% endif %}
+{% endblock %}

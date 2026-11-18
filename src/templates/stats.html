@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}학습 통계 · 스마트보카{% endblock %}
+{% block content %}
+<h1>학습 통계</h1>
+<ul>
+  <li>전체 정답률: {% if overall_accuracy is none %}기록 없음{% else %}{{ overall_accuracy }}%{% endif %}</li>
+  <li>학습 일수: {{ study_days }}일</li>
+</ul>
+
+<h2>단어장별 정답률</h2>
+{% if by_wordbook %}
+<table>
+  <tr><th>단어장</th><th>정답률</th></tr>
+  {% for name, accuracy in by_wordbook %}
+  <tr>
+    <td>{{ name }}</td>
+    <td>{% if accuracy is none %}기록 없음{% else %}{{ accuracy }}%{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>단어장이 없습니다.</p>
+{% endif %}
+{% endblock %}
