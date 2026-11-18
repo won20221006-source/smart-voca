@@ -112,3 +112,10 @@
 - 프로젝트 헌장(Project_Charter)은 승인자 "미정", 가정 포함 초안이라 승격하지 않음. 승인 확인 후 승격 필요
 - 참조 경로 갱신: CLAUDE.md, README.md, 프로젝트 헌장
 - 미수행: 브라우저 클릭 피드백 (사용자 입력 필요)
+
+## 프로젝트 헌장 승인 및 docs 승격 (2026-11-18)
+요청: 승인해주고 독스도 올려줘
+처리:
+- 프로젝트 헌장 승인 처리 (승인자: 사용자, 2026-11-18). 가정 항목 `[가정]`은 그대로 유지
+- `git mv`로 `docs/smart-voca_Project_Charter_v1.0_261021.md` 로 이동, 헤더 갱신
+- docs/ 산출물 4종: Project_Charter, Requirement_Spec, Function_Map, Decision_Records
