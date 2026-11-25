@@ -119,3 +119,7 @@
 - 프로젝트 헌장 승인 처리 (승인자: 사용자, 2026-11-18). 가정 항목 `[가정]`은 그대로 유지
 - `git mv`로 `docs/smart-voca_Project_Charter_v1.0_261021.md` 로 이동, 헤더 갱신
 - docs/ 산출물 4종: Project_Charter, Requirement_Spec, Function_Map, Decision_Records
+
+## 2026-11-25 14:13 — 기말과제 공지 정리
+요청: 업로드된 과제 공지 파일 정리 (교수 지시: 완성)
+처리: `ai-agent/upload/01_공지 (1).md` 읽고 `ai-agent/claude/261125_기말과제/smart-voca_WorkPlan_v1.0_261125.md` 작성 (과제 요약, 일정, 1차 제출 체크리스트, 미확보 자료, 확인 사항). 공지가 참조하는 요건서·Dockerfile 규칙·프롬프트·docker-check.yml 원문은 업로드되지 않아 미확보로 기록. `docs/`는 건드리지 않음.
