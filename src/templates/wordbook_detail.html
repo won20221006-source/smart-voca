@@ -17,6 +17,13 @@
   <button type="submit">추가</button>
 </form>
 
+<h2>CSV로 일괄 등록</h2>
+<p>UTF-8 파일, 한 줄에 <code>영단어,뜻</code>. 같은 단어장에 있는 단어는 건너뜁니다.</p>
+<form method="post" action="/wordbooks/{{ wordbook.id }}/import" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".csv,text/csv" required>
+  <button type="submit">가져오기</button>
+</form>
+
 <h2>단어 목록 ({{ words|length }}개)</h2>
 {% if words %}
 <table>
