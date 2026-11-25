@@ -15,7 +15,7 @@ REVIEW_INTERVAL_DAYS: Tuple[int, ...] = (1, 3, 7, 14, 30)
 WRONG_ANSWER_INTERVAL_DAYS: int = 1
 
 DEFAULT_DB_PATH = os.path.join("data", "smart_voca.db")
-DB_PATH_ENV_NAME = "SMART_VOCA_DB_PATH"
+DB_PATH_ENV_NAME = "DB_PATH"  # 학교 서버 점검 규격(VOCA-SUB-035)에 맞춘 이름
 DEFAULT_ENV_FILE = ".env"
 
 

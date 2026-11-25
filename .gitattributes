@@ -1,0 +1,4 @@
+# 2026-11-25 - smart-voca - 줄바꿈을 LF로 통일 (Windows CRLF 문제 예방, R-12)
+# 파일 위치: .gitattributes
+
+* text=auto eol=lf
