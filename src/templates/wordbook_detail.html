@@ -2,7 +2,7 @@
 {% block title %}{{ wordbook.name }} · 스마트보카{% endblock %}
 {% block content %}
 <h1>{{ wordbook.name }}</h1>
-<p><a href="/wordbooks/{{ wordbook.id }}/study">이 단어장으로 학습 시작</a></p>
+<p><a href="/wordbooks/{{ wordbook.id }}/study">이 단어장으로 학습 시작</a> · <a href="/wordbooks/{{ wordbook.id }}/test">시험 보기</a></p>
 
 <form method="post" action="/wordbooks/{{ wordbook.id }}/rename">
   <input name="name" maxlength="60" value="{{ wordbook.name }}" required>
@@ -25,6 +25,11 @@
 </form>
 
 <h2>단어 목록 ({{ words|length }}개)</h2>
+<form method="get" action="/wordbooks/{{ wordbook.id }}">
+  <input name="q" value="{{ query or '' }}" placeholder="영단어 또는 뜻 검색">
+  <button type="submit">검색</button>
+  {% if query %}<a href="/wordbooks/{{ wordbook.id }}">검색 해제</a>{% endif %}
+</form>
 {% if words %}
 <table>
   <tr><th>단어</th><th>뜻</th><th>예문</th><th>다음 복습일</th><th></th></tr>

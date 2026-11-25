@@ -21,4 +21,15 @@
 {% else %}
 <p>단어장이 없습니다.</p>
 {% endif %}
+
+<h2>자주 틀린 단어 (상위 5개)</h2>
+{% if top_missed %}
+<ol>
+  {% for word, count in top_missed %}
+  <li>{{ word }} · {{ count }}번</li>
+  {% endfor %}
+</ol>
+{% else %}
+<p>아직 틀린 기록이 없습니다.</p>
+{% endif %}
 {% endblock %}

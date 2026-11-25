@@ -41,16 +41,27 @@ def wordbook_create(name: str = Form(""), session: Session = Depends(get_db_sess
 
 @router.get("/wordbooks/{wordbook_id}")
 def wordbook_detail(
-    wordbook_id: int, request: Request, session: Session = Depends(get_db_session)
+    wordbook_id: int,
+    request: Request,
+    q: str = "",
+    session: Session = Depends(get_db_session),
 ):
-    """단어장 상세: 단어 목록과 단어 추가 폼. (REQ-007)"""
+    """단어장 상세: 단어 목록과 단어 추가 폼. 검색어가 있으면 영단어·뜻에서 찾는다. (REQ-007, VOCA-FR-004)"""
     wordbook = get_wordbook(session, wordbook_id)
+    words = list_words(session, wordbook_id)
+    keyword = q.strip().casefold()
+    if keyword:
+        words = [
+            item for item in words
+            if keyword in item.word.casefold() or keyword in item.meaning.casefold()
+        ]
     return TEMPLATES.TemplateResponse(
         request,
         "wordbook_detail.html",
         {
             "wordbook": wordbook,
-            "words": list_words(session, wordbook_id),
+            "words": words,
+            "query": q.strip(),
             **flash_messages(request),
         },
     )

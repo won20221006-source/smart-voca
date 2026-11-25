@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}시험 · {{ wordbook.name }} · 스마트보카{% endblock %}
+{% block content %}
+<h1>시험: {{ wordbook.name }} ({{ format_label }}, {{ questions|length }}문제)</h1>
+<form method="post" action="/wordbooks/{{ wordbook.id }}/test/grade">
+  <input type="hidden" name="total" value="{{ questions|length }}">
+  <ol>
+  {% for question in questions %}
+    {% set i = loop.index0 %}
+    <li>
+      <input type="hidden" name="word_id_{{ i }}" value="{{ question.word_id }}">
+      <input type="hidden" name="format_{{ i }}" value="{{ question.format }}">
+      <input type="hidden" name="direction_{{ i }}" value="{{ question.direction }}">
+      <input type="hidden" name="candidate_{{ i }}" value="{{ question.candidate }}">
+      {% if question.format == "ox" %}
+        <p><strong>{{ question.prompt }}</strong> = {{ question.candidate }} ?</p>
+        <label><input type="radio" name="answer_{{ i }}" value="O"> O (맞음)</label>
+        <label><input type="radio" name="answer_{{ i }}" value="X"> X (틀림)</label>
+      {% elif question.format == "choice" %}
+        <p><strong>{{ question.prompt }}</strong></p>
+        {% for option in question.options %}
+        <label><input type="radio" name="answer_{{ i }}" value="{{ option }}"> {{ option }}</label><br>
+        {% endfor %}
+      {% else %}
+        <p><strong>{{ question.prompt }}</strong></p>
+        <input name="answer_{{ i }}" autocomplete="off">
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ol>
+  <button type="submit">채점하기</button>
+</form>
+{% endblock %}

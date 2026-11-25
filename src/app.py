@@ -14,7 +14,7 @@ from fastapi.responses import RedirectResponse
 from src.core.config import load_settings
 from src.core.errors import DuplicateWordError, NotFoundError, ValidationError
 from src.models.database import build_sqlite_url, create_app_engine, create_session_factory, init_db
-from src.routes import review, stats, study, word, wordbook
+from src.routes import quiz, review, stats, study, word, wordbook
 from src.routes.common import redirect_with_error
 
 
@@ -52,4 +52,5 @@ def create_app(database_url: Optional[str] = None) -> FastAPI:
     app.include_router(study.router)
     app.include_router(review.router)
     app.include_router(stats.router)
+    app.include_router(quiz.router)
     return app

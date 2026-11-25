@@ -69,3 +69,19 @@ class StudyRecord(Base):
     studied_on: Mapped[date] = mapped_column(Date, index=True)
 
     word: Mapped[Word] = relationship(back_populates="records")
+
+
+class QuizAnswer(Base):
+    """시험 문항 한 개의 답 기록. 형식·방향·정오·시각을 남긴다. (VOCA-FR-026)"""
+
+    __tablename__ = "quiz_answers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    word_id: Mapped[int] = mapped_column(
+        ForeignKey("words.id", ondelete="CASCADE"), index=True
+    )
+    question_format: Mapped[str] = mapped_column(String(10))
+    direction: Mapped[str] = mapped_column(String(10))
+    is_correct: Mapped[bool] = mapped_column(Boolean)
+    answered_at: Mapped[datetime] = mapped_column(DateTime)
+    answered_on: Mapped[date] = mapped_column(Date, index=True)

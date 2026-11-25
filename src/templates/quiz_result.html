@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}시험 결과 · {{ wordbook.name }} · 스마트보카{% endblock %}
+{% block content %}
+<h1>시험 결과: {{ wordbook.name }}</h1>
+<ul>
+  <li>점수: {{ correct }} / {{ total }}</li>
+  <li>정답률: {{ accuracy }}%</li>
+</ul>
+
+{% if wrong_results %}
+<h2>틀린 문항 ({{ wrong_results|length }}개)</h2>
+<table>
+  <tr><th>문제</th><th>내 답</th><th>정답</th></tr>
+  {% for item in wrong_results %}
+  <tr>
+    <td>{{ item.prompt }}{% if item.shown %} → {{ item.shown }}{% endif %}</td>
+    <td>{{ item.your_answer }}</td>
+    <td>{{ item.correct_answer }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>모두 맞았습니다.</p>
+{% endif %}
+
+<p><a href="/wordbooks/{{ wordbook.id }}/test">다시 시험 보기</a> · <a href="/wordbooks/{{ wordbook.id }}">단어장으로 돌아가기</a></p>
+{% endblock %}

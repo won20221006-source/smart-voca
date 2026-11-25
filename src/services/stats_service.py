@@ -5,9 +5,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional, Tuple
+from collections import defaultdict
+from typing import Dict, List, Optional, Tuple
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from src.core.stats import (
@@ -16,7 +17,7 @@ from src.core.stats import (
     accuracy_percent,
     count_study_days,
 )
-from src.models.entities import StudyRecord, Wordbook, Word
+from src.models.entities import StudyRecord, QuizAnswer, Wordbook, Word
 
 
 def load_attempt_records(session: Session) -> List[AttemptRecord]:
@@ -42,3 +43,24 @@ def get_wordbook_accuracies(session: Session) -> List[Tuple[str, Optional[float]
     rates = accuracy_by_wordbook(load_attempt_records(session))
     wordbooks = session.scalars(select(Wordbook).order_by(Wordbook.id)).all()
     return [(wordbook.name, rates.get(wordbook.id)) for wordbook in wordbooks]
+
+
+def get_top_missed_words(session: Session, limit: int = 5) -> List[Tuple[str, int]]:
+    """자주 틀린 단어 상위 N개: (단어, 틀린 횟수). 틀린 횟수가 0인 단어는 빼고 큰 순서로 정렬한다. (VOCA-FR-033)"""
+    missed: Dict[int, int] = defaultdict(int)
+    for word_id, count in session.execute(
+        select(StudyRecord.word_id, func.count()).where(StudyRecord.is_correct.is_(False)).group_by(StudyRecord.word_id)
+    ).all():
+        missed[word_id] += count
+    for word_id, count in session.execute(
+        select(QuizAnswer.word_id, func.count()).where(QuizAnswer.is_correct.is_(False)).group_by(QuizAnswer.word_id)
+    ).all():
+        missed[word_id] += count
+
+    ranked = sorted(((count, word_id) for word_id, count in missed.items() if count > 0), reverse=True)[:limit]
+    result = []
+    for count, word_id in ranked:
+        word = session.get(Word, word_id)
+        if word is not None:
+            result.append((word.word, count))
+    return result

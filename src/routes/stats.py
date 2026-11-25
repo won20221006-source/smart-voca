@@ -9,7 +9,7 @@ from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 
 from src.routes.common import TEMPLATES, get_db_session
-from src.services.stats_service import get_overall_stats, get_wordbook_accuracies
+from src.services.stats_service import get_overall_stats, get_top_missed_words, get_wordbook_accuracies
 
 router = APIRouter()
 
@@ -25,5 +25,6 @@ def stats_page(request: Request, session: Session = Depends(get_db_session)):
             "overall_accuracy": overall_accuracy,
             "study_days": study_days,
             "by_wordbook": get_wordbook_accuracies(session),
+            "top_missed": get_top_missed_words(session, limit=5),
         },
     )
